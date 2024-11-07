@@ -22,6 +22,10 @@
     #include <arm_neon.h>
 #endif
 
+#if defined(__loongarch64__) || defined(_M_LOONGARCH64)
+    #include <lsxintrin.h>
+#endif
+
 namespace unicode
 {
 
@@ -220,6 +224,13 @@ struct platform_intrinsics<int64x2_t>
 };
 
 using intrinsics = platform_intrinsics<int64x2_t>;
+#endif
+// }}}
+
+#if defined(__loongarch64__) || defined(_M_LOONGARCH64) // {{{
+template <>
+
+using intrinsics = platform_intrinsics<__m128i>;
 #endif
 // }}}
 
